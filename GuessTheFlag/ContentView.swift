@@ -25,10 +25,12 @@ struct ContentView: View {
                 VStack {
                     Text("Tap the flag")
                         .foregroundColor(.white)
-                        .font(.title).bold()
+                        //.font(.title).bold()
+                        .font(.subheadline.weight(.heavy))
                     Text(countries[correctAnswer])
                         .foregroundColor(.white)
-                        .font(.title).bold()
+                        //.font(.title).bold()
+                        .font(.largeTitle.weight(.semibold))
                 }
                 //MARK: numer in - number come in
                 ForEach(0..<3) { number in
@@ -37,7 +39,9 @@ struct ContentView: View {
                         flagTapped(number)
                     } label: {
                         Image(countries[number])
-                            .renderingMode(.original)
+                            .clipShape(.capsule)
+                            .shadow(radius: 5)
+                            //.renderingMode(.original)
                     }
                 }
             }
