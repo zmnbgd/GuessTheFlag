@@ -19,32 +19,62 @@ struct ContentView: View {
         ZStack {
             //            Color.blue
             //                .ignoresSafeArea()
-            LinearGradient(colors: [.black, .blue], startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea()
-            VStack(spacing: 30) {
-                VStack {
-                    Text("Tap the flag")
-                        .foregroundColor(.white)
+//            LinearGradient(colors: [.black, .blue], startPoint: .top, endPoint: .bottom)
+//                .ignoresSafeArea()
+            RadialGradient(stops: [
+                .init(color: .blue, location: 0.3),
+                .init(color: .black, location: 0.3)
+            ], center: .top, startRadius: 200, endRadius: 700)
+            .ignoresSafeArea()
+            //.blur(radius: 50)
+            
+            VStack {
+                Text("Guest the flag")
+                    .font(.largeTitle.bold())
+                    .foregroundColor(.white)
+                VStack(spacing: 30) {
+                    VStack {
+                        Spacer()
+                        Text("Tap the flag")
+                            //.foregroundColor(.white)
+                            //.foregroundStyle(.secondary)
+                            .foregroundColor(.secondary)
                         //.font(.title).bold()
-                        .font(.subheadline.weight(.heavy))
-                    Text(countries[correctAnswer])
-                        .foregroundColor(.white)
+                            .font(.subheadline.weight(.heavy))
+                        Text(countries[correctAnswer])
+                            .foregroundColor(.white)
                         //.font(.title).bold()
-                        .font(.largeTitle.weight(.semibold))
-                }
-                //MARK: numer in - number come in
-                ForEach(0..<3) { number in
-                    Button {
-                        //MARK: Flag was tapped
-                        flagTapped(number)
-                    } label: {
-                        Image(countries[number])
-                            .clipShape(.capsule)
-                            .shadow(radius: 5)
+                            .font(.largeTitle.weight(.semibold))
+                    }
+                    //MARK: numer in - number come in
+                    ForEach(0..<3) { number in
+                        Button {
+                            //MARK: Flag was tapped
+                            flagTapped(number)
+                        } label: {
+                            Image(countries[number])
+                                .clipShape(.capsule)
+                                .shadow(radius: 5)
                             //.renderingMode(.original)
+                        }
                     }
                 }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 20)
+                .background(.ultraThinMaterial)
+                //.background(Color.white.opacity(2))
+                .clipShape(.rect(cornerRadius: 20))
+                
+                Spacer()
+                //Spacer()
+                
+                Text("Score: ???")
+                    .foregroundStyle(.white)
+                    .font(.title.bold())
+                
+                Spacer()
             }
+            .padding()
         }
         .alert(scoreTitle, isPresented: $showingScore) {
             Button("Continue", action: askQuestion)
@@ -72,3 +102,6 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+
+
+
