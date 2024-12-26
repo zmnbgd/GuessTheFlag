@@ -91,7 +91,8 @@ struct ContentView: View {
             scoreTitle = "You got it!"
             score += 1
         } else {
-            scoreTitle = "Wrong!"
+            //MARK: Challenge - GuessTheFlag - 2. When someone chooses the wrong flag, tell them their mistake in your alert message – something like “Wrong! That’s the flag of France,” for example.
+            scoreTitle = "Wrong! That’s the flag of \(countries[number])."
             score -= 1
         }
         showingScore = true
