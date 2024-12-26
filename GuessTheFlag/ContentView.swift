@@ -86,15 +86,35 @@ struct ContentView: View {
         }
     }
     
+//    func flagTapped(_ number: Int) {
+//        if number == correctAnswer {
+//            scoreTitle = "You got it!"
+//            score += 1
+//        } else if {
+//            scoreTitle = "Wrong! That’s the flag of \(countries[number])."
+//            score -= 1
+//        } else {
+//            score == 8
+//            scoreTitle = "You got it! You're a true flag master!"
+//        }
+//        showingScore = true
+//    }
+ 
     func flagTapped(_ number: Int) {
         if number == correctAnswer {
             scoreTitle = "You got it!"
             score += 1
-        } else {
-            //MARK: Challenge - GuessTheFlag - 2. When someone chooses the wrong flag, tell them their mistake in your alert message – something like “Wrong! That’s the flag of France,” for example.
+        }
+        //MARK: Challenge - GuessTheFlag - 2. When someone chooses the wrong flag, tell them their mistake in your alert message – something like “Wrong! That’s the flag of France,” for example.
+        if number != correctAnswer {
             scoreTitle = "Wrong! That’s the flag of \(countries[number])."
             score -= 1
         }
+        //MARK: Challenge - GuessTheFlag - 3. Make the game show only 8 questions, at which point they see a final alert judging their score and can restart the game.
+        if score == 8 {
+            newGame()
+        }
+        
         showingScore = true
     }
     
@@ -102,7 +122,12 @@ struct ContentView: View {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
     }
-    
+
+    func newGame() {
+        scoreTitle = " Game over! Press Continue to play again"
+        score = 0
+        askQuestion()
+    }
 }
 
 #Preview {
