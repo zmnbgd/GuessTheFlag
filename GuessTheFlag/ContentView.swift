@@ -15,6 +15,8 @@ struct ContentView: View {
     @State private var showingScore = false
     @State private var scoreTitle = ""
     
+    @State private var restartGame = false
+    
     //MARK: Challenge - GuessTheFlag - 1. Add an @State property to store the user’s score, modify it when they get an answer right or wrong, then display it in the alert and in the score label.
     @State private var score = 0
     
@@ -84,6 +86,12 @@ struct ContentView: View {
         } message: {
             Text("You score is \(score)")
         }
+        
+        .alert(scoreTitle, isPresented: $restartGame) {
+            Button("Continue", action: newGame)
+        } message: {
+            Text("Good luck")
+        }
     }
     
 //    func flagTapped(_ number: Int) {
@@ -124,7 +132,7 @@ struct ContentView: View {
     }
 
     func newGame() {
-        scoreTitle = " Game over! Press Continue to play again"
+        scoreTitle = "Game over! Press Continue to play again"
         score = 0
         askQuestion()
     }
