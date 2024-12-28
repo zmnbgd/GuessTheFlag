@@ -81,17 +81,13 @@ struct ContentView: View {
             }
             .padding()
         }
+        
         .alert(scoreTitle, isPresented: $showingScore) {
             Button("Continue", action: askQuestion)
         } message: {
-            Text("You score is \(score)")
+            Text("Your score is \(score)")
         }
-        
-        .alert(scoreTitle, isPresented: $restartGame) {
-            Button("Continue", action: newGame)
-        } message: {
-            Text("Good luck")
-        }
+
     }
     
 //    func flagTapped(_ number: Int) {
@@ -132,7 +128,7 @@ struct ContentView: View {
     }
 
     func newGame() {
-        scoreTitle = "Game over! Press Continue to play again"
+        scoreTitle = "You win! Press Continue to play again"
         score = 0
         askQuestion()
     }
