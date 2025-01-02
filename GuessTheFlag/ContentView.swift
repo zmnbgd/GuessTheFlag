@@ -7,6 +7,19 @@
 
 import SwiftUI
 
+//MARK: Custom Modifier
+struct FlagImage: View {
+    var imageName: String
+    
+    var body: some View {
+        Image(imageName)
+            .clipShape(Capsule())
+            .overlay(Capsule().stroke(Color.black, lineWidth: 1))
+            .shadow(radius: 10)
+            .padding(5)
+    }
+}
+
 struct ContentView: View {
     
     @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Spain", "UK", "Ukraine", "US"].shuffled()
@@ -57,7 +70,9 @@ struct ContentView: View {
                             //MARK: Flag was tapped
                             flagTapped(number)
                         } label: {
-                            Image(countries[number])
+                            //MARK: Challenge - Project 3. - 2. Go back to project 2 and replace the Image view used for flags with a new FlagImage() view that renders one flag image using the specific set of modifiers we had.
+                            //Image(countries[number])
+                            FlagImage(imageName: countries[number])
                                 .clipShape(.capsule)
                                 .shadow(radius: 5)
                             //.renderingMode(.original)
