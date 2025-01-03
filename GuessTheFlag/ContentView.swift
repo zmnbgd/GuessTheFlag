@@ -8,6 +8,28 @@
 import SwiftUI
 
 //MARK: Custom Modifier
+struct fontModifier: ViewModifier {
+    
+    var text: String
+    
+    func body(content: Content) -> some View {
+        
+        Text(text)
+            .font(.largeTitle).bold()
+            .clipShape(.capsule)
+            .foregroundColor(.yellow)
+            .padding(5)
+    }
+}
+
+//MARK: Custom Modifier Extension
+extension View {
+    func appTextModifier(text: String) -> some View {
+        modifier(fontModifier(text: text))
+    }
+}
+
+//MARK: Custom Modifier
 struct FlagImage: View {
     var imageName: String
     
@@ -47,7 +69,9 @@ struct ContentView: View {
             //.blur(radius: 50)
             
             VStack {
-                Text("Guest the flag")
+                //MARK: Challenge - Project 3. - 3. Create a custom ViewModifier (and accompanying View extension) that makes a view have a large, blue font suitable for prominent titles in a view.
+                //Text("Guest the flag")
+                appTextModifier(text: "Guest the flag")
                     .font(.largeTitle.bold())
                     .foregroundColor(.white)
                 VStack(spacing: 30) {
