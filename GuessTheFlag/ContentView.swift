@@ -50,8 +50,6 @@ struct ContentView: View {
     @State private var showingScore = false
     @State private var scoreTitle = ""
     
-    @State private var restartGame = false
-    
     //MARK: Challenge - GuessTheFlag - 1. Add an @State property to store the user’s score, modify it when they get an answer right or wrong, then display it in the alert and in the score label.
     @State private var score = 0
     
