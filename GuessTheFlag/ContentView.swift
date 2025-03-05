@@ -42,6 +42,8 @@ struct FlagImage: View {
     }
 }
 
+
+
 struct ContentView: View {
     
     @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Spain", "UK", "Ukraine", "US"].shuffled()
@@ -49,6 +51,8 @@ struct ContentView: View {
     
     @State private var showingScore = false
     @State private var scoreTitle = ""
+    
+    @State private var rotationAnimationAmount = [0.0, 0.0, 0.0]
     
     //MARK: Challenge - GuessTheFlag - 1. Add an @State property to store the user’s score, modify it when they get an answer right or wrong, then display it in the alert and in the score label.
     @State private var score = 0
@@ -91,16 +95,26 @@ struct ContentView: View {
                         Button {
                             //MARK: Flag was tapped
                             flagTapped(number)
+                            //MARK: - Challenge - Project 6. - 1. When you tap a flag, make it spin around 360 degrees on the Y axis.
+                            withAnimation(.spring(duration: 1.0, bounce: 0.5)) {
+                                rotationAnimationAmount[number] += 360
+                            }
+                            
                         } label: {
                             //MARK: Challenge - Project 3. - 2. Go back to project 2 and replace the Image view used for flags with a new FlagImage() view that renders one flag image using the specific set of modifiers we had.
                             //Image(countries[number])
                             FlagImage(imageName: countries[number])
                                 .clipShape(.capsule)
                                 .shadow(radius: 5)
+                                .rotation3DEffect(.degrees(rotationAnimationAmount[number]), axis: (x: 0.0, y: 1.0, z: 0.0))
                             //.renderingMode(.original)
+
                         }
+
                     }
+
                 }
+                
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 20)
                 .background(.ultraThinMaterial)
