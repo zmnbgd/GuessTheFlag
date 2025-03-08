@@ -54,6 +54,8 @@ struct ContentView: View {
     
     @State private var rotationAnimationAmount = [0.0, 0.0, 0.0]
     
+    @State private var flagButtonOpacity = [1.0, 1.0, 1.0]
+    
     //MARK: Challenge - GuessTheFlag - 1. Add an @State property to store the user’s score, modify it when they get an answer right or wrong, then display it in the alert and in the score label.
     @State private var score = 0
     
@@ -108,7 +110,7 @@ struct ContentView: View {
                                 .shadow(radius: 5)
                                 .rotation3DEffect(.degrees(rotationAnimationAmount[number]), axis: (x: 0.0, y: 1.0, z: 0.0))
                             //.renderingMode(.original)
-
+                                .opacity(flagButtonOpacity[number])
                         }
 
                     }
@@ -155,10 +157,19 @@ struct ContentView: View {
 //        showingScore = true
 //    }
  
+    //MARK: - Challenge - Project 6. - 2. Make the other two buttons fade out to 25% opacity. 
     func flagTapped(_ number: Int) {
         if number == correctAnswer {
             scoreTitle = "You got it!"
             score += 1
+            
+            withAnimation(.easeInOut(duration: 0.5)) {
+                for flag in 0..<3 {
+                    if flag != correctAnswer {
+                        flagButtonOpacity[flag] = 0.25
+                    }
+                }
+            }
         }
         //MARK: Challenge - GuessTheFlag - 2. When someone chooses the wrong flag, tell them their mistake in your alert message – something like “Wrong! That’s the flag of France,” for example.
         if number != correctAnswer {
@@ -176,6 +187,7 @@ struct ContentView: View {
     func askQuestion() {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
+        flagButtonOpacity = [1.0, 1.0, 1.0]
     }
 
     func newGame() {
